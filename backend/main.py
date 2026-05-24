@@ -11,6 +11,14 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Database Dependency
 def get_db():
     db = SessionLocal()
@@ -55,11 +63,3 @@ def update_ticket(
     db: Session = Depends(get_db)
 ):
     return crud.update_ticket_status(db, ticket_id, ticket_update.status)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
