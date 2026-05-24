@@ -79,9 +79,14 @@ function Home() {
   };
 
   // CREATE TICKET
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
 
     e.preventDefault();
+
+    if (loading) return;
+
+    setLoading(true);
 
     try {
 
@@ -89,10 +94,8 @@ function Home() {
 
       alert("Ticket Created Successfully!");
 
-      // REFRESH TICKETS
       fetchTickets();
 
-      // CLEAR FORM
       setFormData({
         customer_name: "",
         customer_email: "",
@@ -104,6 +107,10 @@ function Home() {
 
       console.log(error);
       alert("Error creating ticket");
+
+    } finally {
+
+      setLoading(false);
 
     }
 
@@ -237,7 +244,7 @@ function Home() {
           type="submit"
           className="create-btn"
         >
-          Create Ticket
+          {loading ? "Created" : "Create Ticket"}
         </button>
 
       </form>

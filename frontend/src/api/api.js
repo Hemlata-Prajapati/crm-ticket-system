@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://crm-ticket-system.onrender.com"
+  baseURL: "https://crm-ticket-system.onrender.com/"
 });
 
 export default API;
